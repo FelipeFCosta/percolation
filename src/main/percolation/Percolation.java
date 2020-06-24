@@ -85,7 +85,7 @@ public class Percolation {
     }
 
     /** 
-     *  opens the site if it is not open already
+     * Opens the site if it is not open already
      * @param idx the index of the site to open
     */
     public void open(int idx) {
@@ -124,13 +124,12 @@ public class Percolation {
     }
 
     /**
-     * 
-     * @param idx is the site(idx) full
+     * @param idx is the site[idx] full ?
      * @return
      */
     public boolean isFull(int idx) {
         checkArgument(idx);
-        return isOpen(idx) && full.find(idx) == full.find(virtualTop);
+        return isOpen(idx) && full.connected(idx, virtualTop);
     }
 
     /**
@@ -146,7 +145,7 @@ public class Percolation {
      * @return {@code true} if the system percolates
      */
     public boolean percolates() {
-        return n > 1 ? percolation.find(virtualBottom) == percolation.find(virtualTop) : isOpen(1);
+        return n > 1 ? percolation.connected(virtualBottom, virtualTop) : isOpen(1);
     }
 
     /**
